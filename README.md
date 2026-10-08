@@ -39,26 +39,34 @@ This project implements a multi-layered defense architecture, shifting data qual
 ## 2. Architecture Overview
 
 ```mermaid
-graph TD
-    subgraph Producer Environment (App)
-        SE[Software Engineer] -->|Commits Schema Change| PR[GitHub Pull Request]
-        PR -->|Triggers CI| CI[Contract CI Action]
-        CI -->|Validates against| CJ[(contract.json)]
-        
-        App[Python Application Runtime] -->|Reads| CJ
-        App -->|Writes Valid Data| OrdersTable[(PostgreSQL: orders)]
-        App -->|Routes Invalid Data| QuarantineTable[(PostgreSQL: orders_quarantine)]
+flowchart TD
+    subgraph ProducerEnv["Producer Environment (App)"]
+        SE["Software Engineer"]
+        PR["GitHub Pull Request"]
+        CI["Contract CI Action"]
+        App["Python Application Runtime"]
+        CJ[("contract.json")]
+
+        SE -->|Commits Schema Change| PR
+        PR -->|Triggers CI| CI
+        CI -->|Reads| CJ
+        App -->|Reads| CJ
     end
 
-    subgraph Data Infrastructure
-        OrdersTable
-        QuarantineTable
+    subgraph DataInfra["Data Infrastructure (PostgreSQL)"]
+        OrdersTable[("orders Table")]
+        QuarantineTable[("orders_quarantine Table")]
     end
 
-    subgraph Consumer Environment (dbt)
-        OrdersTable -->|Extracted / Modeled| Dashboard[orders_dashboard Model]
-        Dashboard -->|Evaluated by| DBT[dbt Data Tests]
+    subgraph ConsumerEnv["Consumer Environment (dbt)"]
+        Dashboard["orders_dashboard Model"]
+        DBT["dbt Data Tests"]
     end
+
+    App -->|Writes Valid Data| OrdersTable
+    App -->|Routes Invalid Data| QuarantineTable
+    OrdersTable -->|Extracted / Modeled| Dashboard
+    Dashboard -->|Evaluated by| DBT
 ```
 
 The system operates across three tiers:
