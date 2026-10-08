@@ -1,0 +1,20 @@
+{
+  "project_name": "data-contracts-shift-left",
+  "author": "Adarsh",
+  "pr_url": "https://github.com/Adarsh12325/data-contracts-shift-left/pull/1",
+  "contract_path": "contract.json",
+  "experiment_results": "results/contracts.csv",
+  "frameworks": [
+    "python",
+    "jsonschema",
+    "postgres",
+    "dbt-core",
+    "dbt-postgres",
+    "docker-compose"
+  ],
+  "layers_evaluated": [
+    "downstream_only",
+    "downstream_plus_ci",
+    "all_layers"
+  ]
+}

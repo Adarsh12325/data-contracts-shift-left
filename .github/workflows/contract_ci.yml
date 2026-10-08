@@ -1,0 +1,43 @@
+name: Contract CI Pull Request Validator
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  validate-data-contract:
+    name: Enforce Data Contract Compliance
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Validate Contract JSON Schema Syntax
+        run: |
+          python -c "import json, jsonschema; schema=json.load(open('contract.json')); jsonschema.Draft7Validator.check_schema(schema); print('contract.json is a valid Draft-07 JSON Schema.')"
+
+      - name: Run Contract CI Gatekeeper on Sample Baseline Payload
+        run: |
+          python scripts/check_contract.py --schema-file contract.json --payload-file tests/fixtures/sample_payload.json
+
+      - name: Execute Automated Test Suite
+        run: |
+          pytest tests/ -v

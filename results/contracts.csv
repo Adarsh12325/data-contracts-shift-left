@@ -1,0 +1,49 @@
+change_id,change_type,breaking,config,caught_by,stage_caught,bad_rows_in_dashboard,false_alarm
+1,Column rename,True,downstream_only,dbt,nightly_run,1,False
+1,Column rename,True,downstream_plus_ci,ci,pull_request,0,False
+1,Column rename,True,all_layers,ci,pull_request,0,False
+2,Type change,True,downstream_only,dbt,nightly_run,1,False
+2,Type change,True,downstream_plus_ci,ci,pull_request,0,False
+2,Type change,True,all_layers,ci,pull_request,0,False
+3,Semantic change,True,downstream_only,none,never,1,False
+3,Semantic change,True,downstream_plus_ci,ci,pull_request,0,False
+3,Semantic change,True,all_layers,ci,pull_request,0,False
+4,New enum value,True,downstream_only,dbt,nightly_run,1,False
+4,New enum value,True,downstream_plus_ci,ci,pull_request,0,False
+4,New enum value,True,all_layers,ci,pull_request,0,False
+5,Null in required field,True,downstream_only,dbt,nightly_run,1,False
+5,Null in required field,True,downstream_plus_ci,ci,pull_request,0,False
+5,Null in required field,True,all_layers,ci,pull_request,0,False
+6,Duplicate IDs,True,downstream_only,dbt,nightly_run,2,False
+6,Duplicate IDs,True,downstream_plus_ci,dbt,nightly_run,2,False
+6,Duplicate IDs,True,all_layers,runtime,deploy,0,False
+7,Timezone change,True,downstream_only,none,never,1,False
+7,Timezone change,True,downstream_plus_ci,ci,pull_request,0,False
+7,Timezone change,True,all_layers,ci,pull_request,0,False
+8,Dropped column,True,downstream_only,dbt,nightly_run,1,False
+8,Dropped column,True,downstream_plus_ci,ci,pull_request,0,False
+8,Dropped column,True,all_layers,ci,pull_request,0,False
+9,Silent backfill,True,downstream_only,none,never,1,False
+9,Silent backfill,True,downstream_plus_ci,ci,pull_request,0,False
+9,Silent backfill,True,all_layers,ci,pull_request,0,False
+10,Late data,True,downstream_only,none,never,1,False
+10,Late data,True,downstream_plus_ci,ci,pull_request,0,False
+10,Late data,True,all_layers,ci,pull_request,0,False
+11,Currency swap,True,downstream_only,none,never,1,False
+11,Currency swap,True,downstream_plus_ci,ci,pull_request,0,False
+11,Currency swap,True,all_layers,ci,pull_request,0,False
+12,Test data in prod,True,downstream_only,none,never,1,False
+12,Test data in prod,True,downstream_plus_ci,ci,pull_request,0,False
+12,Test data in prod,True,all_layers,ci,pull_request,0,False
+13,New nullable column,False,downstream_only,none,never,0,False
+13,New nullable column,False,downstream_plus_ci,none,never,0,False
+13,New nullable column,False,all_layers,none,never,0,False
+14,Comment/Description change,False,downstream_only,none,never,0,False
+14,Comment/Description change,False,downstream_plus_ci,none,never,0,False
+14,Comment/Description change,False,all_layers,none,never,0,False
+15,Index addition,False,downstream_only,none,never,0,False
+15,Index addition,False,downstream_plus_ci,none,never,0,False
+15,Index addition,False,all_layers,none,never,0,False
+16,Widened varchar,False,downstream_only,none,never,0,False
+16,Widened varchar,False,downstream_plus_ci,none,never,0,False
+16,Widened varchar,False,all_layers,none,never,0,False

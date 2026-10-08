@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: orders_dashboard
+    description: "Aggregated revenue dashboard model consumed by downstream BI and executive reporting."
+    columns:
+      - name: id
+        description: "Primary key identifier of the order"
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: "Customer identifier"
+        tests:
+          - not_null
+      - name: status
+        description: "Order lifecycle status"
+        tests:
+          - accepted_values:
+              values: ['pending', 'shipped', 'delivered', 'cancelled']
